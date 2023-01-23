@@ -1,0 +1,45 @@
+import java.io.*;
+import java.sql.*;
+import java.util.*;
+public class Ecec {
+public static void main(String[] args)throws IOException {
+try{
+Scanner sc=new Scanner(System.in);
+Class.forName("com.mysql.jdbc.Driver");
+Connection c=DriverManager.getConnection("jdbc:mysql://localhost:3306/gowtham","root","root");
+PreparedStatement ps=c.prepareStatement("insert into student values(?,?,?,?,?,?,?,?,?)");
+int n=1;
+while(true){
+int s1=sc.nextInt();
+ps.setInt(1,s1);
+String s2=sc.next();
+ps.setString(2,s2);
+String s3=sc.next();
+ps.setString(3,s3);
+int s4=sc.nextInt();
+ps.setInt(4,s4);
+int s5=sc.nextInt();
+ps.setInt(5,s5);
+int s6=sc.nextInt();
+ps.setInt(6,s6);
+int s7=sc.nextInt();
+ps.setInt(7,s7);
+int s8=sc.nextInt();
+ps.setInt(8,s8);
+int s9=s4+s5+s6+s7+s8;
+ps.setInt(9,s9);
+ps.executeUpdate();
+n=sc.nextInt();
+if(n==1)
+continue;
+ResultSet rs=ps.executeQuery("select * from student");
+while(rs.next()){
+System.out.println(rs.getInt(1)+" "+rs.getString(2)+" "+rs.getString(3)+" "+rs.getInt(4)+" "+rs.getInt(5)+" 
+"+rs.getInt(6)+" "+rs.getInt(7)+" "+rs.getInt(8)+" "+rs.getInt(9));
+}
+}}
+catch(Exception e){
+System.out.println(e);
+}
+}
+}
